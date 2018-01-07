@@ -30,23 +30,22 @@
 
         var addButton = document.getElementById("addToDb");
         var readButton = document.getElementById("readDb");
-        var data = {
-            Text:"Hello World!"
-        };
+        var data;
 
         addButton.addEventListener("click", function () {
 
-            firebase.database().ref().child('Data').push(data);
+            data = document.getElementById("txtAreaIn").value;
+            firebase.database().ref().push(data);
             console.log("data Pushed");
         });
 
         readButton.addEventListener("click", function () {
 
-            firebase.database().ref().child('Data').on("child_added", snap => {
+            firebase.database().ref().on("child_added", snap => {
 
-                var output = snap.val().Text;
-                document.getElementById("txtArea").innerHTML = output;
-
+                var output = snap.val();
+                document.getElementById("txtAreaOut").innerText = output;
+                console.log(output);
             });
             console.log("data read");
 
