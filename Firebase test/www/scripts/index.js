@@ -27,10 +27,54 @@
         };
         firebase.initializeApp(config);
 
+        const txtEmail = document.getElementById("email");
+        const txtPassword = document.getElementById("password");
+        const btnLogin = document.getElementById("login");
+        const btnSignup = document.getElementById("signup");
+        const btnLogout = document.getElementById("logout");
 
         var addButton = document.getElementById("addToDb");
         var readButton = document.getElementById("readDb");
         var data;
+
+
+        btnLogin.addEventListener('click', e => {
+
+            const email = txtEmail.value;
+            const pass = txtPassword.value;
+            const auth = firebase.auth();
+            const promise = auth.signInWithEmailAndPassword(email, pass)
+            promise.catch(e => console.log(e.message));
+        });
+
+        btnSignup.addEventListener('click', e => {
+
+            const email = txtEmail.value;
+            const pass = txtPassword.value;
+            const auth = firebase.auth();
+            const promise = auth.createUserWithEmailAndPassword(email, pass)
+            promise.catch(e => console.log(e.message));
+        });
+
+        btnLogout.addEventListener('click', e => {
+
+            firebase.auth().signOut();
+        });
+
+        firebase.auth().onAuthStateChanged(firebaseUser => {
+
+            if (firebaseUser) {
+                console.log(firebaseUser);
+                btnLogout.classList.remove('hide');
+            } else {
+                console.log('not logged in');
+                btnLogout.classList.add('hide');
+            }
+
+        })
+
+
+
 
         addButton.addEventListener("click", function () {
 
