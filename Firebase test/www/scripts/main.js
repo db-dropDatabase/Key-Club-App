@@ -1,14 +1,14 @@
-﻿(function () {
+(function () {
     "use strict";
 
 
-    document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
+    document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 
     function onDeviceReady() {
         // Handle the Cordova pause and resume events
-        document.addEventListener( 'pause', onPause.bind( this ), false );
-        document.addEventListener( 'resume', onResume.bind( this ), false );
-        
+        document.addEventListener('pause', onPause.bind(this), false);
+        document.addEventListener('resume', onResume.bind(this), false);
+
         // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
         //var parentElement = document.getElementById('deviceready');
         //var listeningElement = parentElement.querySelector('.listening');
@@ -27,44 +27,41 @@
         };
         firebase.initializeApp(config);
 
-        const txtEmail = document.getElementById("email");
-        const txtPassword = document.getElementById("password");
-        const btnLogin = document.getElementById("login");
-        const btnSignup = document.getElementById("signup");
+        const btnLogout = document.getElementById("logout");
 
+        btnLogout.addEventListener('click', e => {
 
-        btnLogin.addEventListener('click', e => {
+            firebase.auth().signOut();
 
-            const email = txtEmail.value;
-            const pass = txtPassword.value;
-            const auth = firebase.auth();
-            const promise = auth.signInWithEmailAndPassword(email, pass)
-            promise.catch(e => console.log(e.message));
-        });
-
-        btnSignup.addEventListener('click', e => {
-
-            const email = txtEmail.value;
-            const pass = txtPassword.value;
-            const auth = firebase.auth();
-            const promise = auth.createUserWithEmailAndPassword(email, pass)
-            promise.catch(e => console.log(e.message));
         });
 
         firebase.auth().onAuthStateChanged(firebaseUser => {
 
             if (firebaseUser) {
                 console.log(firebaseUser);
-                window.location.href = "main.html";
             } else {
                 console.log('not logged in');
+                window.location.href = "index.html";
             }
 
         })
 
+
+        firebase.database().ref().on("child_added", snap => {
+
+            var output = snap.val();
+            document.getElementById("eventDiv").innerHTML += "<h1 id='" + snap.key + "'>" + output + "</h1>";
+            console.log(output);
+        });
+
+        firebase.database().ref().on("child_removed", snap => {
+
+            document.getElementById(snap.key).remove;
+        });
+
     };
 
- 
+
 
     function onPause() {
         // TODO: This application has been suspended. Save application state here.
@@ -73,4 +70,4 @@
     function onResume() {
         // TODO: This application has been reactivated. Restore application state here.
     };
-} )();
+})();
