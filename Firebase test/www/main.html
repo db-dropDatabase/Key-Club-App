@@ -6,10 +6,19 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://www.gstatic.com/firebasejs/4.8.1/firebase.js 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <title>App-Login</title>
 </head>
 <body>
+
+    <ul>
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+        <button id="logout">Logout</button>
+    </ul>
 
     <h4>App</h4>
 
@@ -17,7 +26,7 @@
 
     </div>
 
-    <button id="logout">Logout</button>
+    
 
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
