@@ -47,10 +47,14 @@
         })
 
 
-        firebase.database().ref().on("child_added", snap => {
+        firebase.database().ref().child("Events").on("child_added", snap => {
 
             var output = snap.val();
-            document.getElementById("eventDiv").innerHTML += "<h1 id='" + snap.key + "'>" + output + "</h1>";
+            var eventBox = document.createElement("div");
+
+            eventBox.id = "'" + snap.key + "'";
+            eventBox.innerHTML += "<h3>" + output + "</h3>";
+            document.getElementById("eventDiv").appendChild(eventBox);
             console.log(output);
         });
 

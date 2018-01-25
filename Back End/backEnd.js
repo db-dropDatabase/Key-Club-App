@@ -13,7 +13,7 @@
 
     document.getElementById('subButton').addEventListener("click", function() {
 
-        var event = document.getElementById('events').value;
-        firebase.database().ref().push(event);
+        var event = document.getElementById('event').value;
+        firebase.database().ref().child('Events').push(event);
     })
 
