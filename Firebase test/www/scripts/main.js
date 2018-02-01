@@ -49,13 +49,29 @@
 
         firebase.database().ref().child("Events").on("child_added", snap => {
 
-            var output = snap.val();
-            var eventBox = document.createElement("div");
+            console.log(snap.val());
 
+            var eventBox = document.createElement("div");
             eventBox.id = "'" + snap.key + "'";
-            eventBox.innerHTML += "<h3>" + output + "</h3>";
+
+            var name = document.createElement("h3");
+            var nameNode = document.createTextNode(snap.val().Name);
+            name.appendChild(nameNode);
+
+            var disc = document.createElement("h5");
+            var discNode = document.createTextNode(snap.val().Discription);
+            disc.appendChild(discNode);
+
+            var date = document.createElement("h4");
+            var dateNode = document.createTextNode(snap.val().Datetime);
+            date.appendChild(dateNode);
+
+            eventBox.appendChild(name);
+            eventBox.appendChild(disc);
+            eventBox.appendChild(date);
+
             document.getElementById("eventDiv").appendChild(eventBox);
-            console.log(output);
+
         });
 
         firebase.database().ref().on("child_removed", snap => {
