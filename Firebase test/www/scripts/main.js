@@ -66,9 +66,20 @@
             var dateNode = document.createTextNode(snap.val().Datetime);
             date.appendChild(dateNode);
 
+            var button = document.createElement("button");
+            var buttonNode = document.createTextNode("sign up here");
+            button.appendChild(buttonNode);
+
+            button.addEventListener('click', function (e) {
+
+                sessionStorage.sesTitle = snap.val().Name;
+                window.location.href = "eventPage.html"
+            });
+
             eventBox.appendChild(name);
             eventBox.appendChild(disc);
             eventBox.appendChild(date);
+            eventBox.appendChild(button);
 
             document.getElementById("eventDiv").appendChild(eventBox);
 
