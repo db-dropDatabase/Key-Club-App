@@ -49,6 +49,7 @@
 
         firebase.database().ref().child("Events").on("child_added", snap => {
 
+
             console.log(snap.val());
 
             var eventBox = document.createElement("div");

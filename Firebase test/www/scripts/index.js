@@ -29,6 +29,7 @@
 
         const txtEmail = document.getElementById("email");
         const txtPassword = document.getElementById("password");
+        const txtName = document.getElementById("name");
         const btnLogin = document.getElementById("login");
         const btnSignup = document.getElementById("signup");
 
@@ -46,6 +47,7 @@
 
             const email = txtEmail.value;
             const pass = txtPassword.value;
+            const name = txtName.value;
             const auth = firebase.auth();
             const promise = auth.createUserWithEmailAndPassword(email, pass)
             promise.catch(e => console.log(e.message));

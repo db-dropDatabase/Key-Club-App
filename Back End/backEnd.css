@@ -1,0 +1,19 @@
+div {
+
+    border-style: solid;
+    border-width: 1px;
+    margin: 10px;
+}
+
+h3 {
+
+    margin: 10px;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
