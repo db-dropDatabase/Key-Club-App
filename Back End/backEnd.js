@@ -21,7 +21,8 @@
 
         	Name: name,
         	Discription: disc,
-        	Datetime: date
+        	Datetime: date,
+            Participants: {token: 'token'}
         };
 
         firebase.database().ref().child('Events').push(event);

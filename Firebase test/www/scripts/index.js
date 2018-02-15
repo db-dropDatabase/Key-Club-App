@@ -27,13 +27,14 @@
         };
         firebase.initializeApp(config);
 
+        //get page data
         const txtEmail = document.getElementById("email");
         const txtPassword = document.getElementById("password");
         const txtName = document.getElementById("name");
         const btnLogin = document.getElementById("login");
         const btnSignup = document.getElementById("signup");
 
-
+        //login event
         btnLogin.addEventListener('click', e => {
 
             const email = txtEmail.value;
@@ -43,6 +44,7 @@
             promise.catch(e => console.log(e.message));
         });
 
+        //signup event
         btnSignup.addEventListener('click', e => {
 
             const email = txtEmail.value;
@@ -53,11 +55,12 @@
             promise.catch(e => console.log(e.message));
         });
 
+        //auth handler
         firebase.auth().onAuthStateChanged(firebaseUser => {
 
             if (firebaseUser) {
                 console.log(firebaseUser);
-                window.location.href = "main.html";
+                window.location.href = "main.html"; //displays the user to the console and switches to main page
             } else {
                 console.log('not logged in');
             }

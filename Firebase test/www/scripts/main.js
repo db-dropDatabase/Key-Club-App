@@ -27,6 +27,7 @@
         };
         firebase.initializeApp(config);
 
+        //handle log out
         const btnLogout = document.getElementById("logout");
 
         btnLogout.addEventListener('click', e => {
@@ -35,58 +36,74 @@
 
         });
 
+        //auth handler for log out
         firebase.auth().onAuthStateChanged(firebaseUser => {
 
             if (firebaseUser) {
                 console.log(firebaseUser);
             } else {
                 console.log('not logged in');
-                window.location.href = "index.html";
+                window.location.href = "index.html"; //returns to login page
             }
 
         })
 
-
+        //list out events
         firebase.database().ref().child("Events").on("child_added", snap => {
 
 
             console.log(snap.val());
 
-            var eventBox = document.createElement("div");
-            eventBox.id = "'" + snap.key + "'";
+            var eventBox = document.createElement("div"); //create the box that holds the event data
+            eventBox.id = snap.key;
 
-            var name = document.createElement("h3");
-            var nameNode = document.createTextNode(snap.val().Name);
+            var name = document.createElement("h3"); //create event name
+            var nameNode = document.createTextNode(snap.val().Name); 
             name.appendChild(nameNode);
 
-            var disc = document.createElement("h5");
+            var disc = document.createElement("h5"); //create event discription
             var discNode = document.createTextNode(snap.val().Discription);
             disc.appendChild(discNode);
 
-            var date = document.createElement("h4");
+            var date = document.createElement("h4"); //create event date
             var dateNode = document.createTextNode(snap.val().Datetime);
             date.appendChild(dateNode);
 
-            var button = document.createElement("button");
+            var button = document.createElement("button"); //create signup button
+            button.setAttribute("id", "signUpButton" + snap.key); //create unique to div button id
             var buttonNode = document.createTextNode("sign up here");
             button.appendChild(buttonNode);
 
-            button.addEventListener('click', function (e) {
-
-                sessionStorage.sesTitle = snap.val().Name;
-                window.location.href = "eventPage.html"
-            });
-
+            eventBox.appendChild(button); //attach all event elements to the event box
             eventBox.appendChild(name);
             eventBox.appendChild(disc);
             eventBox.appendChild(date);
-            eventBox.appendChild(button);
 
-            document.getElementById("eventDiv").appendChild(eventBox);
+            document.getElementById("eventDiv").appendChild(eventBox); //attach the event box to the master box
+
+            firebase.database().ref().child("Events").child(snap.key).child("Participants").on("child_added", snap1 => { //checks for participants  in each event
+
+                if (snap1.val() == firebase.auth().currentUser.email) { //checks if the user has already signed up for the event
+
+                    var alreadySignedUp = document.createElement("h4");
+                    var alreadySignedUpNode = document.createTextNode("Already Signed Up");
+                    alreadySignedUp.appendChild(alreadySignedUpNode);
+
+                    document.getElementById(snap.key).replaceChild(alreadySignedUp, document.getElementById("signUpButton" + snap.key)); //if the user has signed up, replaces the button with "already signed up"
+                }
+            });
+
+            button.addEventListener('click', function (e) {
+
+                sessionStorage.sesTitle = snap.val().Name; //handles clicking on the signup button
+                window.location.href = "eventPage.html"
+            });
 
         });
 
-        firebase.database().ref().on("child_removed", snap => {
+
+
+        firebase.database().ref().child("Events").on("child_removed", snap => { //handles ifan event gets removed
 
             document.getElementById(snap.key).remove;
         });
