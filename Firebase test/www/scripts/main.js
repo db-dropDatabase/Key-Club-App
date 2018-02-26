@@ -90,20 +90,30 @@
                     alreadySignedUp.appendChild(alreadySignedUpNode);
 
                     document.getElementById(snap.key).replaceChild(alreadySignedUp, document.getElementById("signUpButton" + snap.key)); //if the user has signed up, replaces the button with "already signed up"
+
+                    var unSign = document.createElement("button"); //create a unsign up button if they've signed up
+                    unSign.innerHTML = "I Can't Make It";
+                    document.getElementById(snap.key).appendChild(unSign);
+
+                    unSign.addEventListener('click', function (e) { //un signs up the user if they click this button
+
+                        firebase.database().ref().child("Events").child(snap.key).child("Participants").child(snap1.key).remove();
+                        window.location.href = "main.html";
+                    });
                 }
             });
 
             button.addEventListener('click', function (e) {
 
                 sessionStorage.sesTitle = snap.val().Name; //handles clicking on the signup button
-                window.location.href = "eventPage.html"
+                window.location.href = "eventPage.html";
             });
 
         });
 
 
 
-        firebase.database().ref().child("Events").on("child_removed", snap => { //handles ifan event gets removed
+        firebase.database().ref().child("Events").on("child_removed", snap => { //handles if an event gets removed
 
             document.getElementById(snap.key).remove;
         });

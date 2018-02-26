@@ -31,12 +31,18 @@
 
         var signUp = document.getElementById("signUp");
 
+        var Disc = document.getElementById("disc");
+
+        firebase.database().ref().child("Events").orderByChild("Name").equalTo(sessionStorage.sesTitle).once('value', snap => {
+            console.log(snap.val());
+            Disc.innerHTML = (snap.val().Discription);
+        });
 
         signUp.addEventListener('click', e => {
 
             var email = firebase.auth().currentUser.email;
             console.log(email);
-            firebase.database().ref().child("Events").orderByChild('Name').equalTo(sessionStorage.sesTitle).on('child_added', snap => {
+            firebase.database().ref().child("Events").orderByChild("Name").equalTo(sessionStorage.sesTitle).on('child_added', snap => {
                 console.log(snap.key);
                 firebase.database().ref().child("Events").child(snap.key).child("Participants").push(email);
                 window.location.href = "main.html"
