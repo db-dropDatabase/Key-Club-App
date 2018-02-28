@@ -27,31 +27,47 @@
         };
         firebase.initializeApp(config);
 
-        document.getElementById('title').innerHTML = sessionStorage.sesTitle;
+        //get page data
+        const txtEmail = document.getElementById("email");
+        const txtPassword = document.getElementById("password");
+        const txtName = document.getElementById("name");
+        const btnLogin = document.getElementById("login");
+        const btnsignUp = document.getElementById("signup");
 
-        var signUp = document.getElementById("signUp");
+        //signup event
+        btnsignUp.addEventListener('click', e => {
 
-        var Disc = document.getElementById("disc");
-
-        //tries to load the event discription
-        firebase.database().ref().child("Events").orderByChild("Name").equalTo(sessionStorage.sesTitle).once('value', snap => {
-            console.log(snap.val());
-            Disc.innerHTML = (snap.val().Discription);
+            const email = txtEmail.value;
+            const pass = txtPassword.value;
+            const auth = firebase.auth();
+            const promise = auth.createUserWithEmailAndPassword(email, pass)
+            promise.catch(e => console.log(e.message));
         });
 
-        //handles signup
-        signUp.addEventListener('click', e => {
+        //login event
+        btnLogin.addEventListener('click', e => {
 
-            var name = firebase.auth().currentUser.displayName;
-
-            firebase.database().ref().child("Events").orderByChild("Name").equalTo(sessionStorage.sesTitle).on('child_added', snap => {
-                console.log(snap.key);
-                firebase.database().ref().child("Events").child(snap.key).child("Participants").push(name);
-                window.location.href = "main.html"
-            });
-            
-            
+            window.location.href = "index.html";
         });
+
+        //auth handler
+        firebase.auth().onAuthStateChanged(firebaseUser => {
+
+            if (firebaseUser) {
+                const name = txtName.value;
+                firebaseUser.updateProfile({
+
+                    displayName: name
+                });
+                console.log(firebaseUser);
+                window.location.href = "main.html"; //displays the user to the console and switches to main page
+
+            } else {
+                console.log('not logged in');
+
+            }
+
+        })
 
     };
 
@@ -65,4 +81,3 @@
         // TODO: This application has been reactivated. Restore application state here.
     };
 })();
-

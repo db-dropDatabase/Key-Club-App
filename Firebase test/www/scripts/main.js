@@ -41,12 +41,14 @@
 
             if (firebaseUser) {
                 console.log(firebaseUser);
+                document.getElementById("name").innerHTML = firebaseUser.displayName
             } else {
                 console.log('not logged in');
                 window.location.href = "index.html"; //returns to login page
             }
 
         })
+
 
         //list out events
         firebase.database().ref().child("Events").on("child_added", snap => {
@@ -83,7 +85,7 @@
 
             firebase.database().ref().child("Events").child(snap.key).child("Participants").on("child_added", snap1 => { //checks for participants  in each event
 
-                if (snap1.val() == firebase.auth().currentUser.email) { //checks if the user has already signed up for the event
+                if (snap1.val() == firebase.auth().currentUser.displayName) { //checks if the user has already signed up for the event
 
                     var alreadySignedUp = document.createElement("h4");
                     var alreadySignedUpNode = document.createTextNode("Already Signed Up");
