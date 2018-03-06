@@ -30,6 +30,7 @@
         //get page data
         const txtEmail = document.getElementById("email");
         const txtPassword = document.getElementById("password");
+        const txtNewPassword = document.getElementById("password2");
         const txtName = document.getElementById("name");
         const btnLogin = document.getElementById("login");
         const btnsignUp = document.getElementById("signup");
@@ -40,8 +41,23 @@
             const email = txtEmail.value;
             const pass = txtPassword.value;
             const auth = firebase.auth();
-            const promise = auth.createUserWithEmailAndPassword(email, pass)
-            promise.catch(e => console.log(e.message));
+
+            if (txtEmail != null && txtName != null && txtPassword != null) {
+
+                if (txtPassword.value == txtNewPassword.value) {
+
+                    const promise = auth.createUserWithEmailAndPassword(email, pass)
+                    promise.catch(e => console.log(e.message));
+
+                } else {
+
+                    console.log("The passwords do not match.");
+                }
+            } else {
+
+                console.log("Please fill out all fields.");
+            }
+
         });
 
         //login event
