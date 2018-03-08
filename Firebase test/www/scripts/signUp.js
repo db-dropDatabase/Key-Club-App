@@ -76,6 +76,13 @@
                     displayName: name
                 });
                 console.log(firebaseUser);
+
+                firebaseUser.sendEmailVerification().then(function () {
+                    // Email sent.
+                }).catch(function (error) {
+                    // An error happened.
+                });
+
                 window.location.href = "main.html"; //displays the user to the console and switches to main page
 
             } else {
