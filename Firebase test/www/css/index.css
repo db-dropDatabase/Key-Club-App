@@ -94,6 +94,12 @@ h3 {
     align-content: center;
 }
 
+/* centers the pictures*/
+.mySlides {
+
+    align-content: center;
+}
+
 /* Caption text */
 .text {
     color: #f2f2f2;
@@ -160,6 +166,11 @@ h3 {
     -ms-transform: rotate(90deg); /* IE 9 */
     -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
     transform: rotate(90deg);
+}
+
+.slideshow-container, .mySlides, .hide, .text {
+    
+    border: none !important;
 }
 
 /*end slideshow CSS*/

@@ -43,10 +43,6 @@
                 console.log(firebaseUser);
                 document.getElementById("name").innerHTML = firebaseUser.displayName
 
-                if (firebaseUser.emailVerified == false) {
-                    alert("Please check your email to verify your account.");
-                };
-
             } else {
                 console.log('not logged in');
                 window.location.href = "index.html"; //returns to login page
@@ -144,7 +140,7 @@
             }
             slides[slideIndex - 1].style.display = "block";
             dots[slideIndex - 1].className += " active";
-            setTimeout(showSlides, 5000); // Change image every 2 seconds
+            setTimeout(showSlides, 2000); // Change image every 2 seconds
         }
 
     };

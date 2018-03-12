@@ -83,7 +83,9 @@
                     // An error happened.
                 });
 
-                window.location.href = "main.html"; //displays the user to the console and switches to main page
+        
+                alert("Please check your email to verify your account. Then you can log in."); //verification alert
+                window.location.href = "index.html";
 
             } else {
                 console.log('not logged in');

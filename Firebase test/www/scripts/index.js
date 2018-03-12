@@ -39,8 +39,17 @@
             const email = txtEmail.value;
             const pass = txtPassword.value;
             const auth = firebase.auth();
+
+            if (firebase.auth().currentUser != null) {
+
+                if (firebase.auth().currentUser.emailVerified == false) {
+
+                    alert("Please check your email to verify your account.");
+                }
+            }
             const promise = auth.signInWithEmailAndPassword(email, pass)
             promise.catch(e => console.log(e.message));
+
         });
 
         //signup event
@@ -53,10 +62,19 @@
         firebase.auth().onAuthStateChanged(firebaseUser => {
 
             if (firebaseUser) {
-                console.log(firebaseUser);
-                window.location.href = "main.html"; //displays the user to the console and switches to main page
+
+                if (firebaseUser.emailVerified == true) {
+
+                    console.log(firebaseUser);
+                    window.location.href = "main.html"; //displays the user to the console and switches to main page
+                } else {
+
+                    alert("Please check your email to verify your account.");
+                }
+
             } else {
-                console.log('not logged in');
+
+                console.log("not logged in");
             }
 
         })
