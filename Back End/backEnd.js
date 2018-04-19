@@ -16,6 +16,8 @@
         var name = document.getElementById('eventName').value;
         var disc = document.getElementById('eventDisc').value;
         var date = document.getElementById('eventDate').value;
+        console.log(date);
+
 
         var event = {
 
@@ -26,6 +28,7 @@
         };
 
         firebase.database().ref().child('Events').push(event);
+        
     })
 
     firebase.database().ref().child("Events").on("child_added", snap => {

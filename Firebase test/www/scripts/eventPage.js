@@ -31,13 +31,18 @@
 
         var signUp = document.getElementById("signUp");
 
-        var Disc = document.getElementById("disc");
+        var Disc = document.getElementById("discr");
+
+        var Time = document.getElementById("time");
 
         //tries to load the event discription
         firebase.database().ref().child("Events").orderByChild("Name").equalTo(sessionStorage.sesTitle).once('value', snap => {
-            console.log(snap.val());
-            Disc.innerHTML = (snap.val().Discription);
+            snap.forEach(snap1 => {
+                Disc.innerHTML = snap1.child("Discription").val();
+                Time.innerHTML = snap1.child("Datetime").val();
+            })
         });
+
 
         //handles signup
         signUp.addEventListener('click', e => {
@@ -51,6 +56,12 @@
             });
             
             
+        });
+
+        //handles back button
+        back.addEventListener('click', e => {
+
+            window.location.href = "main.html"
         });
 
     };

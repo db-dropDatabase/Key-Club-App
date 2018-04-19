@@ -8,6 +8,7 @@ body {
     -webkit-user-select: none;
     user-select: none;
     text-align: center;
+    background-color:lightslategray;
     /*background-image: url("/www/images/keyclublogoblack.png");*/
 }
 
@@ -87,11 +88,12 @@ h3 {
 /*Slideshow CSS*/
 
 /* Slideshow container */
-.slideshow-container {
+div.slideshow-container {
     width: 80%;
     position: relative;
     margin: auto;
     align-content: center;
+
 }
 
 /* centers the pictures*/
