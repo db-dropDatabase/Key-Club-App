@@ -18,12 +18,16 @@
         var date = document.getElementById('eventDate').value;
         console.log(date);
 
+        nDate = new Date(date).toISOString();
+        console.log(nDate);
+
+
 
         var event = {
 
         	Name: name,
         	Discription: disc,
-        	Datetime: date,
+        	Datetime: nDate,
             Participants: {token: 'token'}
         };
 

@@ -35,11 +35,14 @@
 
         var Time = document.getElementById("time");
 
+
         //tries to load the event discription
         firebase.database().ref().child("Events").orderByChild("Name").equalTo(sessionStorage.sesTitle).once('value', snap => {
             snap.forEach(snap1 => {
                 Disc.innerHTML = snap1.child("Discription").val();
-                Time.innerHTML = snap1.child("Datetime").val();
+                var initTime = snap1.child("Datetime").val();
+                console.log(initTime);
+                Time.innerHTML = initTime;
             })
         });
 
