@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
     "use strict";
 
 
@@ -71,10 +71,13 @@
 
             if (firebaseUser) {
                 const name = txtName.value;
+                const hours = 0;
+
                 firebaseUser.updateProfile({
 
                     displayName: name
                 });
+
                 console.log(firebaseUser);
 
                 firebaseUser.sendEmailVerification().then(function () {

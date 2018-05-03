@@ -36,6 +36,15 @@
 
         });
 
+        //handle user page switch
+        const btnNames = document.getElementById("names");
+
+        btnNames.addEventListener('click', e => {
+
+            window.location.href = "users.html";
+
+        });
+
         //auth handler for log out
         firebase.auth().onAuthStateChanged(firebaseUser => {
 

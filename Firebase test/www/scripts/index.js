@@ -40,14 +40,14 @@
             const pass = txtPassword.value;
             const auth = firebase.auth();
 
-            if (firebase.auth().currentUser != null) {
+            if (firebase.auth().currentUser !== null) {
 
-                if (firebase.auth().currentUser.emailVerified == false) {
+                if (firebase.auth().currentUser.emailVerified === false) {
 
                     alert("Please check your email to verify your account.");
                 }
             }
-            const promise = auth.signInWithEmailAndPassword(email, pass)
+            const promise = auth.signInWithEmailAndPassword(email, pass);
             promise.catch(e => console.log(e.message));
 
         });
@@ -63,7 +63,7 @@
 
             if (firebaseUser) {
 
-                if (firebaseUser.emailVerified == true) {
+                if (firebaseUser.emailVerified === true) {
 
                     console.log(firebaseUser);
                     window.location.href = "main.html"; //displays the user to the console and switches to main page
@@ -77,17 +77,17 @@
                 console.log("not logged in");
             }
 
-        })
+        });
 
-    };
+    }
 
  
 
     function onPause() {
         // TODO: This application has been suspended. Save application state here.
-    };
+    }
 
     function onResume() {
         // TODO: This application has been reactivated. Restore application state here.
-    };
+    }
 } )();

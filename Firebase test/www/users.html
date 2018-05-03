@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://www.gstatic.com/firebasejs/4.8.1/firebase.js 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title>App-Event</title>
+</head>
+<body>
+
+    <h1>Service Hours</h1>
+
+    <button id="back">Back</button>
+
+    <h3 id="displayNum"></h3>
+
+    <form>
+        Add Service Hours
+        <input type="number" name="quantity" min="0" max="24">
+        <input type="submit">
+    </form>
+
+    
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="scripts/users.js"></script>
+
+</body>
+</html>
